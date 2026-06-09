@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - update-readme1
   workflow_dispatch: {}
 
 permissions:
