@@ -29,177 +29,222 @@ A modern reimplementation of the classic **Pong**, built with pure **p5.js** (no
   - **Arena selector** (4 available scenarios).
   - **Live preview** of the selected arena.
   - **Start new match** and **Quit game** buttons.
-- CPU name is randomly picked from: `Cyborg`, `Iron Man`, `Robocop`, `T-800`.
-- Fully black overlay while the menu is open, hiding the canvas underneath.
 
-#### In-game HUD
-
-- **HTML scoreboard** pinned to the top center, formatted as `Name  N : N  Name`.
-- **Restart** button (bottom-center, left) — resets the score while keeping names and arena.
-- **Stop** button (bottom-center, right) — pauses the game and opens the pause modal.
-
-#### Pause modal (Stop button)
-
-- Shows the **final scoreboard** for the current match.
-- **10-second countdown** that automatically sends the player back to the home screen.
-
-#### Victory modal (5 points)
-
-- Title with 🏆 in gold and the winner's name.
-- Scoreboard summary.
-- **New match** (returns to the home menu) and **Quit game** buttons.
-
-#### Audio and voice
-
-- **Bounce sound** when the ball collides with a paddle.
-- **Goal sound** when someone scores.
-- **Voice narration** (`pt-BR`) on every point, announcing only the scoring player's name and current score.
-
-#### Visual
-
-- **800x400** canvas centered on screen with a black background around it.
-- The ball rotates proportionally to its speed (`rotate` based on the velocity vector magnitude).
-- Arenas are rendered with **letterbox zoom** (preserves aspect ratio without distortion).
-- Custom **favicon** using `bola.png`.
+# 🏓 Pong
 
 ---
 
-### 🗂️ Project structure
+This repository contains a modern reimplementation of the classic Pong game built with p5.js. Documentation is provided in two language sections: English first, then Portuguese.
+
+---
+
+## 🇺🇸 English
+
+### Overview
+
+A modern reimplementation of the classic **Pong**, built with pure **p5.js** (no build step, no framework). The project evolved incrementally and includes a complete HUD, menus, voice narration (pt-BR), arena selection, scoreboard, win condition and organized assets.
+
+### Live demo / GitHub Pages
+
+This project can be published to GitHub Pages. See the CI section below for details.
+
+### Features
+
+- Player controls the left paddle with the mouse.
+- CPU controls the right paddle with a simple AI.
+- Ball accelerates on collisions.
+- Voice narration (pt-BR) announces points via Web Speech API.
+- First to 5 points wins — triggers a victory modal with a trophy.
+
+### Screenshots
+
+- Home / Menu
+  ![Screenshot 1](assets/screenshots/screenshot-1.png)
+
+- In-game HUD
+  ![Screenshot 2](assets/screenshots/screenshot-2.png)
+
+- Pause modal
+  ![Screenshot 2.1](assets/screenshots/screenshot-2.1.png)
+
+- Victory modal
+  ![Screenshot 3](assets/screenshots/screenshot-3.png)
+
+### Project structure
 
 ```
 .
-├── index.html              # HTML shell, loads p5, p5.sound, CSS and sketch
-├── style.css               # HUD, modals, buttons and scoreboard styles
-├── sketch.js               # all game logic (classes, state, HUD, modals)
+├── index.html
+├── style.css
+├── sketch.js
 ├── README.md
 └── assets/
     ├── images/
-    │   ├── bola.png        # also used as favicon
-    │   ├── barra01.png     # player paddle
-    │   ├── barra02.png     # CPU paddle
-    │   ├── Arena2.png      # Arena 1
-    │   ├── Arena3.jpg      # Arena 2
-    │   ├── Arena4.jpg      # Arena 3
-    │   └── Arena5.jpg      # Arena 4
     └── sounds/
-        ├── 446100__justinvoke__bounce.wav                     # bounce
-        └── 274178__littlerobotsoundfactory__jingle_win_synth_02.wav  # goal
 ```
 
----
+### Code architecture (high level)
 
-### 🧩 Code architecture (`sketch.js`)
+- `Raquete` and `Bola` classes encapsulate paddle and ball logic.
+- HUD is implemented using real DOM elements (divs / buttons) over the canvas.
+- Simple AABB-style collision helper and robust ball handling to avoid sticking.
+- State flags control UI flow (home menu, paused, in-game, victory).
 
-- **Constants block** at the top groups all game configuration (dimensions, speeds, acceleration, points to win, scoreboard styles).
-- **`Raquete` class**: encapsulates position, dimensions, sprite and movement. Takes an `ehJogador` flag to switch between mouse control and simple AI.
-- **`Bola` class**: encapsulates position, velocity, rotation and collisions. Paddle collisions force the `vx` vector in the correct direction (`Math.abs(vx)` or `-Math.abs(vx)`) multiplied by `BOLA_ACELERACAO_COLISAO`, fixing the classic "stuck ball" bug where it oscillates inside the paddle.
-- **`colideRetanguloCirculo` function**: simplified AABB-style collision detection.
-- **HUD system in plain DOM**: the scoreboard, buttons and modals are real `<div>`/`<button>` elements appended to `document.body` and positioned with CSS `position: fixed`, instead of being drawn on the canvas. This decouples UI from the render loop and simplifies styling.
-- **State flow** controlled by flags (`jogoIniciado`, `jogoPausado`) and by the functions `mostraModalNome`, `voltaTelaInicial`, `paraJogo`, `verificaVitoria`, `mostraModalVitoria`, `mostraTelaSaida`.
-- **`escapaHtml`** sanitizes any user-provided text before it lands in `innerHTML` (defense against injection via the name field).
+### Running locally
 
----
+No build required. Serve the folder over HTTP and open in browser:
 
-### 🚀 Running locally
-
-There is no build step. Just serve the files over HTTP (required for `loadSound` / `loadImage`).
-
-```bash
-python3 -m http.server 8765
+```powershell
+python -m http.server 8765
+# then open http://localhost:8765
 ```
 
-Then open <http://localhost:8765> in your browser.
+### Controls
 
----
+- Move paddle: move the mouse vertically.
+- Start match: "Start new match" button or Enter in name input.
+- Pause/Stop: "Stop" button.
+- Reset score: "Restart" button.
 
-### ⌨️ Controls
+### CI / GitHub Actions (Pages deploy)
 
-| Action       | How                                                     |
-| ------------ | ------------------------------------------------------- |
-| Move paddle  | Move the **mouse** vertically                           |
-| Start match  | **Start new match** button or `Enter` in the name field |
-| Pause / stop | **Stop** button                                         |
-| Reset score  | **Restart** button                                      |
+This repository contains a workflow at `.github/workflows/gh-pages.yml` that publishes the site to GitHub Pages.
 
----
+- Trigger: push to `update-readme1` or `main`.
+- Uses: `peaceiris/actions-gh-pages` to publish repository root to `gh-pages`.
+- Permissions: uses `${{ secrets.GITHUB_TOKEN }}` with `permissions: contents: write` and `pages: write`.
 
-### 🛠️ Tech stack
+How to trigger:
 
-- [p5.js 1.6.0](https://p5js.org/) — canvas and render loop.
-- [p5.sound](https://p5js.org/reference/#/libraries/p5.sound) — sound effects.
-- Vanilla **HTML + CSS + JavaScript** — HUD, modals and styling.
-- **Web Speech API** (`SpeechSynthesisUtterance`) — score narration.
+- Push to `update-readme1` or `main`.
+- Force redeploy: `git commit --allow-empty -m "chore: trigger pages redeploy"` then push.
 
----
+Troubleshooting:
 
-### 📌 Development history
+- 403 errors: verify workflow permissions and branch protection rules on `gh-pages`.
+- Wrong files: change `publish_dir` in the workflow.
+- No index: ensure `index.html` exists in published folder.
 
-Each item below was implemented and validated incrementally during development:
+### Development history
 
-1. Initial refactor: constants block, split into `Raquete` and `Bola` classes, typo fix and stuck-ball bug fix.
-2. Fixed HTML scoreboard at the top center.
+1. Initial refactor: constants, classes, stuck-ball bug fix.
+2. HTML scoreboard.
 3. Welcome modal with name field.
-4. CPU name randomly picked from a themed list.
-5. Arena selector with 4 options and live preview.
-6. Centered canvas with black background around it.
-7. **Restart** and **Stop** buttons centered at the bottom.
-8. Pause modal with a **10-second countdown** that returns to the home screen.
-9. Voice narration limited to the player who scored.
-10. Win condition at **5 points** + trophy modal.
-11. Asset reorganization under `assets/images/` and `assets/sounds/`.
-12. Favicon using `bola.png`.
+4. CPU name randomization.
+5. Arena selector + live preview.
+6. Centered canvas.
+7. Restart and Stop buttons.
+8. Pause modal with 10s countdown.
+9. Voice narration for scoring.
+10. Victory modal (5 points).
+11. Assets organized under `assets/images` and `assets/sounds`.
+12. Favicon from `bola.png`.
 
 ---
 
-### 🔧 Recent updates
+## 🇧🇷 Português
 
-- Organized screenshot images: moved game screenshots into `assets/screenshots/` and updated README paths.
-- Added a GitHub Actions workflow (`.github/workflows/gh-pages.yml`) to publish the site to GitHub Pages (publishes to the `gh-pages` branch on push to `update-readme1` or `main`).
-- Created a `.gitignore` with common patterns and cleaned up repository files.
-- Fixed workflow permissions (`permissions: contents: write` and `pages: write`) and adjusted checkout settings so the action can push to `gh-pages`.
+### Visão geral
 
-How to trigger the publish:
+Reimplementação do clássico **Pong**, construída com **p5.js** puro (sem build, sem framework). O projeto foi desenvolvido incrementalmente e inclui HUD, menus, narração por voz (pt-BR), seleção de arena, placar, condição de vitória e organização dos assets.
 
-- Push commits to `update-readme1` or `main` and the workflow will run and publish to GitHub Pages if successful. To force a redeploy without changing files, you can create an empty commit (`git commit --allow-empty -m "chore: trigger pages redeploy"`) and push it.
-- It's recommended to test changes locally first (see "Running locally" above) before pushing.
+### Demonstração / GitHub Pages
+
+O projeto pode ser publicado no GitHub Pages. Veja a seção de CI abaixo para detalhes.
+
+### Funcionalidades
+
+- Jogador controla a raquete esquerda com o mouse.
+- CPU controla a raquete direita com IA simples.
+- A bola acelera a cada colisão.
+- Narração em pt-BR usando a Web Speech API.
+- Primeiro a 5 pontos vence — modal de vitória com troféu.
+
+### Capturas de tela
+
+- Tela inicial / Menu
+  ![Captura 1](assets/screenshots/screenshot-1.png)
+
+- HUD durante o jogo
+  ![Captura 2](assets/screenshots/screenshot-2.png)
+
+- Modal de pausa
+  ![Captura 2.1](assets/screenshots/screenshot-2.1.png)
+
+- Modal de vitória
+  ![Captura 3](assets/screenshots/screenshot-3.png)
+
+### Estrutura do projeto
+
+```
+.
+├── index.html
+├── style.css
+├── sketch.js
+├── README.md
+└── assets/
+    ├── images/
+    └── sounds/
+```
+
+### Arquitetura do código (visão geral)
+
+- Classes `Raquete` e `Bola` encapsulam a lógica.
+- HUD implementado com elementos DOM reais (divs / botões).
+- Detecção de colisão simples e tratamento para evitar que a bola fique "grudada".
+- Flags de estado controlam fluxo da UI (menu inicial, pausa, jogo, vitória).
+
+### Como rodar localmente
+
+```powershell
+python -m http.server 8765
+# abra http://localhost:8765
+```
+
+### Controles
+
+- Mover raquete: mover o mouse verticalmente.
+- Iniciar partida: botão "Iniciar nova partida" ou Enter no campo de nome.
+- Pausar/Parar: botão "Parar".
+- Reiniciar placar: botão "Reiniciar".
+
+### CI / GitHub Actions (Publicação no Pages)
+
+Este repositório contém um workflow em `.github/workflows/gh-pages.yml` que publica o site no GitHub Pages.
+
+- Gatilho: push para `update-readme1` ou `main`.
+- Usa: `peaceiris/actions-gh-pages` para publicar a raiz do repositório em `gh-pages`.
+- Permissões: usa `${{ secrets.GITHUB_TOKEN }}` com `permissions: contents: write` e `pages: write`.
+
+Como disparar:
+
+- Faça push para `update-readme1` ou `main`.
+- Forçar redeploy: `git commit --allow-empty -m "chore: trigger pages redeploy"` e dê push.
+
+Solução de problemas:
+
+- Erro 403: verifique permissões do workflow e proteção de branch `gh-pages`.
+- Arquivos errados: ajuste `publish_dir` no workflow.
+- Sem index: garanta que `index.html` exista na pasta publicada.
+
+### Histórico de evolução
+
+1. Refatoração inicial: constantes, classes, correção do bug da bola.
+2. Placar em HTML.
+3. Modal de boas-vindas com campo de nome.
+4. Nome da CPU aleatório.
+5. Seletor de arenas + pré-visualização.
+6. Canvas centralizado.
+7. Botões Reiniciar e Parar.
+8. Modal de pausa com contador de 10s.
+9. Narração por voz.
+10. Modal de vitória (5 pontos).
+11. Organização de assets em `assets/images` e `assets/sounds`.
+12. Favicon com `bola.png`.
 
 ---
 
-## 🇧🇷 Versão em Português
-
-Reimplementação moderna do clássico **Pong**, construída em **p5.js** puro (sem build, sem framework) e evoluída de forma incremental com o apoio do **GitHub Copilot**. O projeto começa como um jogo simples e ganha uma camada completa de HUD, menus, narração por voz, seleção de arena, sistema de placar, condição de vitória e organização de assets.
-
----
-
-### 🎮 Sobre o jogo
-
-- **Jogador** controla a raquete da esquerda com o **mouse**.
-- **CPU** controla a raquete da direita com uma IA simples (segue a bola).
-- A bola acelera a cada colisão para tornar a partida progressivamente mais difícil.
-- Cada gol é narrado em **português** por síntese de voz (`speechSynthesis`).
-- **Primeiro a 5 pontos vence** a partida e dispara o modal de vitória com troféu.
-
----
-
-### ✨ Funcionalidades
-
-#### Tela inicial / menu
-
-- Modal de boas-vindas com:
-  - Campo para digitar o **nome do jogador** (máx. 16 caracteres).
-  - **Seletor de arena** (4 cenários disponíveis).
-  - **Pré-visualização ao vivo** da arena selecionada.
-  - Botões **Iniciar nova partida** e **Sair do jogo**.
-- Nome da CPU é sorteado aleatoriamente da lista: `Cyborg`, `Iron Man`, `Robocop`, `T-800`.
-- Fundo totalmente preto (overlay) enquanto o menu está aberto, escondendo o canvas.
-
-#### HUD durante a partida
-
-- **Placar HTML** fixo no topo central, no formato `Nome  N : N  Nome`.
-- Botão **Reiniciar** (centro-inferior, à esquerda) — zera o placar mantendo nomes e arena.
-- Botão **Parar** (centro-inferior, à direita) — pausa o jogo e abre o modal de pausa.
-
-#### Modal de pausa (botão Parar)
+Made with ❤️ — contributions welcome.
 
 - Mostra **placar final da partida**.
 - Contador regressivo de **10 segundos** que retorna automaticamente para a tela inicial.
