@@ -1,15 +1,14 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (official)
 
 on:
   push:
     branches:
-      - update-readme1
       - main
 
-# Required permissions so the workflow can push to the repo and update Pages
 permissions:
-  contents: write
+  contents: read
   pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -17,14 +16,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          # ensure the action uses the provided GITHUB_TOKEN credentials to push
-          persist-credentials: true
-          fetch-depth: 0
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          publish_branch: gh-pages
+          path: ./
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
