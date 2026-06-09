@@ -1,0 +1,70 @@
+name: Deploy to gh-pages (git push)
+
+on:
+  push:
+    branches:
+      - main
+      - update-readme1
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Setup Node (optional)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies (if any)
+        run: |
+          if [ -f package.json ]; then npm ci; else echo "No package.json, skipping install"; fi
+
+      - name: Build site (if applicable)
+        run: |
+          if [ -f package.json ] && npm run | grep -q "build"; then npm run build; else echo "No build step detected, publishing repo root"; fi
+
+      - name: Deploy to gh-pages via git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Prepare publish directory (prefer dist or build if present)
+          if [ -d dist ]; then PUBLISH_DIR=dist; elif [ -d build ]; then PUBLISH_DIR=build; else PUBLISH_DIR=.; fi
+
+          # Create an orphan branch and clean it
+          git switch --orphan gh-pages
+          git rm -rf . || true
+
+          # Copy files to root (exclude .github and node_modules)
+          if [ "$PUBLISH_DIR" = "." ]; then
+            cp -R index.html style.css sketch.js assets README.md . 2>/dev/null || true
+          else
+            cp -R "$PUBLISH_DIR"/* .
+          fi
+
+          # Ensure no workflows are published
+          rm -rf .github || true
+          rm -rf node_modules || true
+
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to publish"
+          else
+            git commit -m "chore: deploy to gh-pages from ${GITHUB_REF}"
+            git push -f origin gh-pages
+          fi
