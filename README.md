@@ -46,7 +46,11 @@ A modern reimplementation of the classic **Pong**, built with pure **p5.js** (no
 
 ### Live demo / GitHub Pages
 
-This project can be published to GitHub Pages. See the CI section below for details.
+This project is published to GitHub Pages. Live site:
+
+https://ninneee12.github.io/PongGame/
+
+See the CI section below for details about the automated deploy.
 
 ### Features
 
@@ -150,7 +154,11 @@ Reimplementação do clássico **Pong**, construída com **p5.js** puro (sem bui
 
 ### Demonstração / GitHub Pages
 
-O projeto pode ser publicado no GitHub Pages. Veja a seção de CI abaixo para detalhes.
+O projeto está publicado no GitHub Pages. Site:
+
+https://ninneee12.github.io/PongGame/
+
+Veja a seção de CI abaixo para detalhes sobre o deploy automático.
 
 ### Funcionalidades
 
