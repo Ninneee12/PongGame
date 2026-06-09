@@ -23,6 +23,7 @@ A modern reimplementation of the classic **Pong**, built with pure **p5.js** (no
 ### ✨ Features
 
 #### Home screen / menu
+
 - Welcome modal with:
   - Field to enter the **player name** (max 16 characters).
   - **Arena selector** (4 available scenarios).
@@ -32,25 +33,30 @@ A modern reimplementation of the classic **Pong**, built with pure **p5.js** (no
 - Fully black overlay while the menu is open, hiding the canvas underneath.
 
 #### In-game HUD
+
 - **HTML scoreboard** pinned to the top center, formatted as `Name  N : N  Name`.
 - **Restart** button (bottom-center, left) — resets the score while keeping names and arena.
 - **Stop** button (bottom-center, right) — pauses the game and opens the pause modal.
 
 #### Pause modal (Stop button)
+
 - Shows the **final scoreboard** for the current match.
 - **10-second countdown** that automatically sends the player back to the home screen.
 
 #### Victory modal (5 points)
+
 - Title with 🏆 in gold and the winner's name.
 - Scoreboard summary.
 - **New match** (returns to the home menu) and **Quit game** buttons.
 
 #### Audio and voice
+
 - **Bounce sound** when the ball collides with a paddle.
 - **Goal sound** when someone scores.
 - **Voice narration** (`pt-BR`) on every point, announcing only the scoring player's name and current score.
 
 #### Visual
+
 - **800x400** canvas centered on screen with a black background around it.
 - The ball rotates proportionally to its speed (`rotate` based on the velocity vector magnitude).
 - Arenas are rendered with **letterbox zoom** (preserves aspect ratio without distortion).
@@ -108,12 +114,12 @@ Then open <http://localhost:8765> in your browser.
 
 ### ⌨️ Controls
 
-| Action            | How                                              |
-| ----------------- | ------------------------------------------------ |
-| Move paddle       | Move the **mouse** vertically                    |
-| Start match       | **Start new match** button or `Enter` in the name field |
-| Pause / stop      | **Stop** button                                  |
-| Reset score       | **Restart** button                               |
+| Action       | How                                                     |
+| ------------ | ------------------------------------------------------- |
+| Move paddle  | Move the **mouse** vertically                           |
+| Start match  | **Start new match** button or `Enter` in the name field |
+| Pause / stop | **Stop** button                                         |
+| Reset score  | **Restart** button                                      |
 
 ---
 
@@ -164,6 +170,7 @@ Reimplementação moderna do clássico **Pong**, construída em **p5.js** puro (
 ### ✨ Funcionalidades
 
 #### Tela inicial / menu
+
 - Modal de boas-vindas com:
   - Campo para digitar o **nome do jogador** (máx. 16 caracteres).
   - **Seletor de arena** (4 cenários disponíveis).
@@ -173,25 +180,30 @@ Reimplementação moderna do clássico **Pong**, construída em **p5.js** puro (
 - Fundo totalmente preto (overlay) enquanto o menu está aberto, escondendo o canvas.
 
 #### HUD durante a partida
+
 - **Placar HTML** fixo no topo central, no formato `Nome  N : N  Nome`.
 - Botão **Reiniciar** (centro-inferior, à esquerda) — zera o placar mantendo nomes e arena.
 - Botão **Parar** (centro-inferior, à direita) — pausa o jogo e abre o modal de pausa.
 
 #### Modal de pausa (botão Parar)
+
 - Mostra **placar final da partida**.
 - Contador regressivo de **10 segundos** que retorna automaticamente para a tela inicial.
 
 #### Modal de vitória (5 pontos)
+
 - Título com 🏆 em dourado e nome do vencedor.
 - Resumo do placar.
 - Botões **Nova partida** (volta para o menu inicial) e **Sair do jogo**.
 
 #### Áudio e voz
+
 - **Som de quique** quando a bola colide com uma raquete.
 - **Som de gol** quando alguém pontua.
 - **Narração por voz** (`pt-BR`) a cada ponto, falando apenas o nome do jogador que pontuou e sua pontuação atual.
 
 #### Visual
+
 - Canvas **800x400** centralizado na tela, com fundo preto ao redor.
 - Bola gira proporcionalmente à sua velocidade (`rotate` em função da magnitude do vetor).
 - Arena renderizada com **letterbox-zoom** (preserva proporção sem distorcer).
@@ -249,12 +261,12 @@ Depois abra <http://localhost:8765> no navegador.
 
 ### ⌨️ Controles
 
-| Ação                | Como                                |
-| ------------------- | ----------------------------------- |
-| Mover raquete       | Mexer o **mouse** verticalmente     |
-| Iniciar partida     | Botão **Iniciar nova partida** ou `Enter` no campo de nome |
-| Pausar / encerrar   | Botão **Parar**                     |
-| Reiniciar placar    | Botão **Reiniciar**                 |
+| Ação              | Como                                                       |
+| ----------------- | ---------------------------------------------------------- |
+| Mover raquete     | Mexer o **mouse** verticalmente                            |
+| Iniciar partida   | Botão **Iniciar nova partida** ou `Enter` no campo de nome |
+| Pausar / encerrar | Botão **Parar**                                            |
+| Reiniciar placar  | Botão **Reiniciar**                                        |
 
 ---
 
@@ -283,3 +295,200 @@ Cada item abaixo foi implementado e validado de forma incremental ao longo do de
 10. Condição de vitória ao atingir **5 pontos** + modal de troféu.
 11. Reorganização de assets em `assets/images/` e `assets/sounds/`.
 12. Favicon usando `bola.png`.
+
+---
+
+### 📷 Screenshots
+
+- Image 1 — Welcome / Home  
+  ![Screenshot 1](assets/screenshots/screenshot-1.png)
+
+- Image 2 — In-game HUD  
+  ![Screenshot 2](assets/screenshots/screenshot-2.png)
+
+- Image 2.1 — Pause modal  
+  ![Screenshot 2.1](assets/screenshots/screenshot-2.1.png)
+
+- Image 3 — Victory modal  
+  ![Screenshot 3](assets/screenshots/screenshot-3.png)
+
+---
+
+## 🇧🇷 Versão em português
+
+Reimplementação moderna do clássico **Pong**, construída em **p5.js** puro (sem build, sem framework) e evoluída de forma incremental com o apoio do **GitHub Copilot**. O projeto começa como um jogo simples e ganha uma camada completa de HUD, menus, narração por voz, seleção de arena, sistema de placar, condição de vitória e organização de assets.
+
+---
+
+### 🎮 Sobre o jogo
+
+- **Jogador** controla a raquete da esquerda com o **mouse**.
+- **CPU** controla a raquete da direita com uma IA simples (segue a bola).
+- A bola acelera a cada colisão para tornar a partida progressivamente mais difícil.
+- Cada gol é narrado em **português** por síntese de voz (`speechSynthesis`).
+- **Primeiro a 5 pontos vence** a partida e dispara o modal de vitória com troféu.
+
+---
+
+### ✨ Funcionalidades
+
+#### Tela inicial / menu
+
+- Modal de boas-vindas com:
+  - Campo para digitar o **nome do jogador** (máx. 16 caracteres).
+  - **Seletor de arena** (4 cenários disponíveis).
+  - **Pré-visualização ao vivo** da arena selecionada.
+  - Botões **Iniciar nova partida** e **Sair do jogo**.
+- Nome da CPU é sorteado aleatoriamente da lista: `Cyborg`, `Iron Man`, `Robocop`, `T-800`.
+- Fundo totalmente preto (overlay) enquanto o menu está aberto, escondendo o canvas.
+
+#### HUD durante a partida
+
+- **Placar HTML** fixo no topo central, no formato `Nome  N : N  Nome`.
+- Botão **Reiniciar** (centro-inferior, à esquerda) — zera o placar mantendo nomes e arena.
+- Botão **Parar** (centro-inferior, à direita) — pausa o jogo e abre o modal de pausa.
+
+#### Modal de pausa (botão Parar)
+
+- Mostra **placar final da partida**.
+- Contador regressivo de **10 segundos** que retorna automaticamente para a tela inicial.
+
+#### Modal de vitória (5 pontos)
+
+- Título com 🏆 em dourado e nome do vencedor.
+- Resumo do placar.
+- Botões **Nova partida** (volta para o menu inicial) e **Sair do jogo**.
+
+#### Áudio e voz
+
+- **Som de quique** quando a bola colide com uma raquete.
+- **Som de gol** quando alguém pontua.
+- **Narração por voz** (`pt-BR`) a cada ponto, falando apenas o nome do jogador que pontuou e sua pontuação atual.
+
+#### Visual
+
+- Canvas **800x400** centralizado na tela, com fundo preto ao redor.
+- Bola gira proporcionalmente à sua velocidade (`rotate` em função da magnitude do vetor).
+- Arena renderizada com **letterbox-zoom** (preserva proporção sem distorcer).
+- **Favicon** personalizado usando `bola.png`.
+
+---
+
+### 🗂️ Estrutura do projeto
+
+```
+.
+├── index.html              # shell HTML, carrega p5, p5.sound, CSS e sketch
+├── style.css               # estilos de HUD, modais, botões e placar
+├── sketch.js               # toda a lógica do jogo (classes, estado, HUD, modais)
+├── README.md
+└── assets/
+    ├── images/
+    │   ├── bola.png        # também usada como favicon
+    │   ├── barra01.png     # raquete do jogador
+    │   ├── barra02.png     # raquete da CPU
+    │   ├── Arena2.png      # Arena 1
+    │   ├── Arena3.jpg      # Arena 2
+    │   ├── Arena4.jpg      # Arena 3
+    │   └── Arena5.jpg      # Arena 4
+    └── sounds/
+        ├── 446100__justinvoke__bounce.wav                     # quique
+        └── 274178__littlerobotsoundfactory__jingle_win_synth_02.wav  # gol
+```
+
+---
+
+### 🧩 Arquitetura do código (`sketch.js`)
+
+- **Bloco de constantes** no topo agrupa toda a configuração do jogo (dimensões, velocidades, aceleração, pontos para vencer, estilos do placar).
+- **Classe `Raquete`**: encapsula posição, dimensões, sprite e movimento. Recebe o flag `ehJogador` para alternar entre controle por mouse e IA simples.
+- **Classe `Bola`**: encapsula posição, velocidade, rotação e colisões. As colisões com as raquetes forçam o vetor `vx` no sentido correto (`Math.abs(vx)` ou `-Math.abs(vx)`) multiplicado por `BOLA_ACELERACAO_COLISAO`, evitando o bug clássico de "bola grudada" oscilando dentro da raquete.
+- **Função `colideRetanguloCirculo`**: detecção AABB simplificada.
+- **Sistema de HUD em DOM puro**: placar, botões e modais são `<div>`/`<button>` reais anexados ao `document.body` e posicionados via CSS `position: fixed`, em vez de desenhados no canvas. Isso desacopla a UI do loop de renderização e facilita a estilização.
+- **Fluxo de estado** controlado por flags (`jogoIniciado`, `jogoPausado`) e pelas funções `mostraModalNome`, `voltaTelaInicial`, `paraJogo`, `verificaVitoria`, `mostraModalVitoria`, `mostraTelaSaida`.
+- **`escapaHtml`** sanitiza qualquer texto inserido pelo usuário antes de cair em `innerHTML` (defesa contra injeção via campo de nome).
+
+---
+
+### 🚀 Como rodar localmente
+
+Não há build. Basta servir os arquivos por HTTP (necessário para `loadSound` / `loadImage`).
+
+```bash
+python3 -m http.server 8765
+```
+
+Depois abra <http://localhost:8765> no navegador.
+
+---
+
+### ⌨️ Controles
+
+| Ação              | Como                                                       |
+| ----------------- | ---------------------------------------------------------- |
+| Mover raquete     | Mexer o **mouse** verticalmente                            |
+| Iniciar partida   | Botão **Iniciar nova partida** ou `Enter` no campo de nome |
+| Pausar / encerrar | Botão **Parar**                                            |
+| Reiniciar placar  | Botão **Reiniciar**                                        |
+
+---
+
+### 🛠️ Tecnologias
+
+- [p5.js 1.6.0](https://p5js.org/) — canvas e loop de renderização.
+- [p5.sound](https://p5js.org/reference/#/libraries/p5.sound) — efeitos sonoros.
+- **HTML + CSS + JavaScript** vanilla — HUD, modais e estilos.
+- **Web Speech API** (`SpeechSynthesisUtterance`) — narração dos pontos.
+
+---
+
+### 📌 Histórico de evolução
+
+Cada item abaixo foi implementado e validado de forma incremental ao longo do desenvolvimento:
+
+1. Refatoração inicial: bloco de constantes, separação em classes `Raquete` e `Bola`, correção de typo e do bug de bola grudada.
+2. Placar em HTML fixo no topo central.
+3. Modal de boas-vindas com campo de nome.
+4. Nome da CPU sorteado de uma lista temática.
+5. Seletor de arenas com 4 opções e pré-visualização ao vivo.
+6. Centralização do canvas com fundo preto ao redor.
+7. Botões **Reiniciar** e **Parar** centralizados na parte inferior.
+8. Modal de pausa com **contador regressivo de 10s** que retorna ao menu inicial.
+9. Narração por voz apenas do jogador que pontuou.
+10. Condição de vitória ao atingir **5 pontos** + modal de troféu.
+11. Reorganização de assets em `assets/images/` e `assets/sounds/`.
+12. Favicon usando `bola.png`.
+
+---
+
+### 📷 Screenshots
+
+- Image 1 — Welcome / Home  
+  ![Screenshot 1](assets/screenshots/screenshot-1.png)
+
+- Image 2 — In-game HUD  
+  ![Screenshot 2](assets/screenshots/screenshot-2.png)
+
+- Image 2.1 — Pause modal  
+  ![Screenshot 2.1](assets/screenshots/screenshot-2.1.png)
+
+- Image 3 — Victory modal  
+  ![Screenshot 3](assets/screenshots/screenshot-3.png)
+
+---
+
+### 📷 Capturas de tela
+
+- Imagem 1 — Tela inicial  
+  ![Captura 1](assets/screenshots/screenshot-1.png)
+
+- Imagem 2 — HUD do jogo  
+  ![Captura 2](assets/screenshots/screenshot-2.png)
+
+- Imagem 2.1 — Modal de pausa  
+  ![Captura 2.1](assets/screenshots/screenshot-2.1.png)
+
+- Imagem 3 — Modal de vitória  
+  ![Captura 3](assets/screenshots/screenshot-3.png)
+
+---
