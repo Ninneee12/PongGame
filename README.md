@@ -151,6 +151,20 @@ Each item below was implemented and validated incrementally during development:
 
 ---
 
+### 🔧 Recent updates
+
+- Organized screenshot images: moved game screenshots into `assets/screenshots/` and updated README paths.
+- Added a GitHub Actions workflow (`.github/workflows/gh-pages.yml`) to publish the site to GitHub Pages (publishes to the `gh-pages` branch on push to `update-readme1` or `main`).
+- Created a `.gitignore` with common patterns and cleaned up repository files.
+- Fixed workflow permissions (`permissions: contents: write` and `pages: write`) and adjusted checkout settings so the action can push to `gh-pages`.
+
+How to trigger the publish:
+
+- Push commits to `update-readme1` or `main` and the workflow will run and publish to GitHub Pages if successful. To force a redeploy without changing files, you can create an empty commit (`git commit --allow-empty -m "chore: trigger pages redeploy"`) and push it.
+- It's recommended to test changes locally first (see "Running locally" above) before pushing.
+
+---
+
 ## 🇧🇷 Versão em Português
 
 Reimplementação moderna do clássico **Pong**, construída em **p5.js** puro (sem build, sem framework) e evoluída de forma incremental com o apoio do **GitHub Copilot**. O projeto começa como um jogo simples e ganha uma camada completa de HUD, menus, narração por voz, seleção de arena, sistema de placar, condição de vitória e organização de assets.
