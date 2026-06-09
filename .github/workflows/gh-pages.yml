@@ -6,12 +6,21 @@ on:
       - update-readme1
       - main
 
+# Required permissions so the workflow can push to the repo and update Pages
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # ensure the action uses the provided GITHUB_TOKEN credentials to push
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
