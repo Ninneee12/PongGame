@@ -1,4 +1,4 @@
-# 🏓 Pong — Aula 4 (GitHub Copilot)
+# 🏓 Pong
 
 > 🇺🇸 [English version](#-english-version) · 🇧🇷 [Versão em português](#-versão-em-português)
 
